@@ -1,0 +1,66 @@
+\section{Phương Pháp}
+
+\subsection{Biến đổi Z và ROC}
+Định nghĩa (biến đổi Z hai phía):
+\[
+X(z) = \sum_{n=-\infty}^{\infty} x(n)\,z^{-n}, \qquad \text{ROC} = \{ z \in \mathbb{C} : \textstyle\sum |x(n)z^{-n}| < \infty \}
+\]
+Các cặp biến đổi dùng trong bài:
+\begin{center}
+\begin{tabular}{lll}
+\hline
+$x(n)$ & $X(z)$ & ROC \\
+\hline
+$\delta(n-k)$ & $z^{-k}$ & $\mathbb{C}$, bỏ $z=0$ nếu $k>0$, bỏ $z=\infty$ nếu $k<0$ \\
+$a^n u(n)$ & $\dfrac{1}{1-az^{-1}}$ & $|z| > |a|$ \\
+$-a^n u(-n-1)$ & $\dfrac{1}{1-az^{-1}}$ & $|z| < |a|$ \\
+\hline
+\end{tabular}
+\end{center}
+Quy trình:
+\begin{enumerate}
+    \item Tách $x(n)$ thành tổng các thành phần cơ bản, áp dụng tính tuyến tính.
+    \item ROC của tổng $\supseteq$ giao ROC các thành phần (bằng nhau nếu không có triệt tiêu cực--không).
+    \item Quy đồng để xác định cực/không. ROC không chứa cực; right-sided $\Rightarrow$ ROC ngoài cực lớn nhất, left-sided $\Rightarrow$ ROC trong cực nhỏ nhất, two-sided $\Rightarrow$ vành khuyên (rỗng thì $X(z)$ không tồn tại).
+\end{enumerate}
+
+\subsection{Tích chập tuyến tính}
+\[
+y(n) = \sum_{k=-\infty}^{\infty} h(k)\,x(n-k)
+\]
+Với $x(n)$ dài $N$, $h(n)$ dài $M$ (cùng bắt đầu tại $n=0$): $y(n)$ dài $N+M-1$, $n \in [0, N+M-2]$.
+
+\noindent\textbf{Gập--dịch (folding \& shifting):} với mỗi $n$: gập $x(k) \to x(-k)$, dịch $n$ mẫu $\to x(n-k)$, nhân từng mẫu với $h(k)$, cộng dồn.
+
+\noindent\textbf{Ma trận:} $\mathbf{y} = \mathbf{X}\mathbf{h}$, với $\mathbf{X}$ là ma trận Toeplitz kích thước $(N+M-1) \times M$, cột $j$ là $x(n)$ dịch xuống $j$ mẫu, phần thiếu điền 0:
+\[
+\mathbf{X}_{ij} = x(i-j), \quad 0 \le i \le N+M-2,\ 0 \le j \le M-1
+\]
+
+\subsection{Tích chập vòng}
+\[
+y(n) = \sum_{k=0}^{M-1} h(k)\,x[(n-k) \bmod N], \quad 0 \le n \le N-1
+\]
+$x(n)$ được coi là một chu kỳ của tín hiệu tuần hoàn $\tilde{x}(n) = x(n \bmod N)$, nên chỉ số $n-k$ được quấn về $[0, N-1]$.
+
+\noindent\textbf{Gập--dịch:} gập vòng $x[(-k) \bmod N]$, dịch vòng $n$ mẫu, nhân với $h(k)$, cộng dồn.
+
+\noindent\textbf{Ma trận:} $\mathbf{y} = \mathbf{C}\mathbf{h}$, $\mathbf{C}$ là ma trận vòng (circulant) $N \times M$:
+\[
+\mathbf{C}_{ij} = x[(i-j) \bmod N]
+\]
+Quan hệ với tích chập tuyến tính: $y_{\text{vòng}}(n) = \sum_{r} y_{\text{tt}}(n + rN)$, $0 \le n \le N-1$ (chồng lấn miền thời gian). Hai kết quả trùng nhau khi zero-pad lên $L \ge N+M-1$.
+
+\subsection{Năng lượng tín hiệu}
+\[
+E_x = \sum_{n} |x(n)|^2
+\]
+Vẽ năng lượng theo từng mẫu $|x(n)|^2$, $|y(n)|^2$ (stem) cùng figure với $x(n)$, $y(n)$; ghi tổng $E_x$, $E_y$ trên tiêu đề subplot.
+
+\subsection{Công cụ Scilab}
+\begin{itemize}
+    \item Tín hiệu / tích chập: \texttt{conv}, \texttt{convol} (đối chiếu kết quả), \texttt{toeplitz}, \texttt{modulo}, \texttt{sum}.
+    \item Đồ thị: \texttt{subplot}, \texttt{plot2d3} (stem), \texttt{xtitle}, \texttt{xs2png} (xuất ảnh).
+    \item Audio (core): \texttt{wavread}, \texttt{wavwrite}, \texttt{auread}, \texttt{auwrite}, \texttt{sound}, \texttt{playsnd}.
+    \item Ảnh: toolbox cài qua ATOMS (\texttt{atomsInstall("IPCV")}, SIVP).
+\end{itemize}

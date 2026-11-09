@@ -1,0 +1,36 @@
+\subsection{Exercise 3}
+Tìm $X(z)$ và ROC của:
+\[
+x(n) = 0.5^n u(n) + 0.9^n u(-n-1)
+\]
+
+% TODO: lời giải
+Ta tách $x(n)$ thành $f(n)$ và $g(n)$, $x(n) = f(n) - g(n)$, ta có:
+\begin{center}
+    $\begin{cases}
+        f(n) = 0.5^nu(n)\\
+        g(n) = 0.9^nu(-n-1)
+    \end{cases}$
+\end{center}
+Biến đổi $f(n)$ sang miền Z, ta có:\\
+\[
+F(z) = \frac{1}{1-0.5z^{-1}}
+\]
+\[
+ROC_F = \{|z| > 0.5\}
+\]
+Biến đổi $g(n)$ sang miền Z, ta có:\\
+\[
+g(n) = -0.9^nu(-n-1)
+G(z) = \frac{1}{1-0.9z^{-1}}
+\]
+\[
+ROC_G = \{|z| < 0.9\}
+\]
+Cuối cùng, ta có kết quả của $X(z)$:
+\[
+X(z) = F(z) - G(z) = \frac{1}{1-0.5z^{-1}} - \frac{1}{1-0.9z^{-1}} = \frac{-0.4z^{-1}}{1 - 1.4^{-1} + 0.45z^{-2}}
+\]
+\[
+ROC = ROC_F \cap ROC_G = {0.5 < |z| < 0.9}
+\]

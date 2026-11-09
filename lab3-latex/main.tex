@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+
+% Cấu hình Header và Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Xử Lý tín hiệu số}
+\fancyhead[C]{HK261}
+\fancyhead[R]{CO2036}
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{15pt}
+
+% Cấu hình lề trang (chuẩn A4, lề 2cm)
+\geometry{a4paper, margin=2cm}
+
+% Định dạng đánh số section có dấu chấm (1., 2., ...) và subsection (4.1, 4.2, ...)
+\makeatletter
+\def\@seccntformat#1{\csname the#1\endcsname\ }
+\makeatother
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+% Các gói bổ trợ thường dùng cho bài thực hành Xử Lý Tín Hiệu Số (DSP)
+\usepackage{amssymb}           % Công thức toán học (Z-transform, DFT, FFT,...)
+\usepackage{graphicx}         % Chèn hình ảnh đồ thị tín hiệu
+\usepackage{float}            % Cố định vị trí hình ảnh với [H]
+\usepackage{listings}         % Chèn mã nguồn SciLab / MATLAB / Python
+\usepackage{xcolor}           % Màu sắc
+\usepackage{hyperref}         % Chèn liên kết
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+
+% Style mã nguồn Scilab (dùng: \begin{lstlisting} ... \end{lstlisting})
+\lstdefinestyle{scilab}{
+    language=Matlab,
+    morecomment=[l]{//},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red!60!black},
+    numbers=left, numberstyle=\tiny, numbersep=6pt,
+    frame=single, breaklines=true, columns=fullflexible
+}
+\lstset{style=scilab}
+
+% Thông tin báo cáo
+\title{BÀI THỰC HÀNH XỬ LÝ TÍN HIỆU SỐ -- LAB 4}
+\author{Nguyễn Minh Đức - 2410816 \\ Trần Gia Huân - 2533019}
+\date{24/09/2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\section*{Tổng Quan}
+
+\input{chapter/chap1-introduction/chap1.tex}
+\input{chapter/chap2-goals/chap2.tex}
+\input{chapter/chap3-method/chap3.tex}
+\input{chapter/chap4-content/chap4.tex}
+\input{chapter/chap5-discuss/chap5.tex}
+\input{chapter/chap6-reference/chap6.tex}
+
+\end{document}
+
